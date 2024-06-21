@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Product Details</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 th:text="${product.name}">Product Name</h1>
+      <img th:src="@{${product.imageUrl}}" alt="Product Image" class="img-fluid">
+      <p th:text="${product.description}">Product Description</p>
+      <h3 th:text="'$' + ${product.price}">Price</h3>
+      <button class="btn btn-primary">Add to Cart</button>
+      <a th:href="@{/products}" class="btn btn-secondary">Back to Products</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

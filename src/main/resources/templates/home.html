@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+  <title>Home</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <!-- 로그인 메시지 -->
+  <div th:if="${message}" class="alert" th:classappend="' alert-' + ${messageType}" role="alert">
+    <span th:text="${message}">Message</span>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Product List</h1>
+      <!-- 로그인 상태 확인 -->
+      <div sec:authorize="isAuthenticated()">
+        Logged in as: <strong sec:authentication="name">username</strong>
+        (<span th:text="${session.id}">sessionId</span>)
+        <a href="/logout" class="btn btn-danger ml-2">Logout</a>
+      </div>
+      <div sec:authorize="isAnonymous()">
+        You are not logged in.
+        <a href="/login" class="btn btn-primary ml-2">Login</a>
+      </div>
+      <div class="row">
+        <div class="col-md-4" th:each="product : ${products}">
+          <div class="card mb-4 shadow-sm">
+            <img th:src="${product.imageUrl}" class="card-img-top" alt="Product Image">
+            <div class="card-body">
+              <h5 class="card-title" th:text="${product.name}">Product Name</h5>
+              <p class="card-text" th:text="${product.description}">Product Description</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"
+                          th:onclick="'addToCart(' + ${product.id} + ')'">Add to Cart</button>
+                  <a th:href="'/checkout?productId=' + ${product.id} + '&fromCart=false'" class="btn btn-sm btn-outline-primary ml-2">Buy It Now</a>
+                  <a th:href="'/chat/' + ${product.id}" class="btn btn-sm btn-outline-info ml-2">Chat</a>
+                </div>
+                <small class="text-muted" th:text="'$' + ${product.price}">Price</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 장바구니 -->
+      <div class="cart mt-4">
+        <a href="/cart" class="btn btn-primary">
+          Cart (<span th:text="${session.cart != null ? session.cart.size() : 0}">0</span>)
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function getCsrfToken() {
+    const csrfElement = document.querySelector('meta[name="_csrf"]');
+    return csrfElement ? csrfElement.content : '';
+  }
+
+  function addToCart(productId) {
+    fetch('/cart/add/' + productId, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': getCsrfToken()  // CSRF 토큰을 헤더에 추가
+      }
+    }).then(response => {
+      if (response.ok) {
+        location.reload();
+      } else {
+        alert('Failed to add to cart');
+      }
+    });
+  }
+</script>
+
+<!-- CSRF 메타 태그 추가 -->
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+</body>
+</html>

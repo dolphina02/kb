@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ESP</title>
+  <!-- 여기서 @{} 대신 /css/styles.css 로 변경 -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+  <div class="sidebar">
+    <h2>ESP</h2>
+    <nav>
+      <ul>
+        <li><a href="/event-dictionary">Event Dictionary</a></li>
+        <li><a href="/event-request">Event 이동 요청</a></li>
+        <li><a href="/subscription-guide">구독 Guide</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="content">
+    <div class="header">
+      <h1>Main</h1>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Customer">
+        <button id="searchButton">Search</button>
+      </div>
+    </div>
+    <div class="search-results">
+      <!-- Search results will be displayed here -->
+    </div>
+  </div>
+</div>
+<script src="/js/scripts.js"></script>
+</body>
+</html>
