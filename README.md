@@ -5,8 +5,8 @@
 **중간과제**
  1. 해당 프로젝트의 기본적인 구조를 파악합니다. 
     - 제출내용 없음
- 3. Entity들의 관계를 파악하여 ERD를 작성합니다. 
-    - 제출내용 : 그려진 ERD를 캡쳐하여 제출
+ 3. Entity들의 관계를 파악하여 ERD를 작성 합니다. 
+    - 제출내용 : 그려진 ERD를 캡쳐하여 제출
     - https://online.visual-paradigm.com/, https://app.diagrams.net/ 등을 사용, 다른 툴을 사용해도 무관
  4. ShippingInfo, ShippingController(껍데이는 생성되어있음), ShippingService, ShippingRepository를 직접 생성하고 정상적인 동작이 가능하도록 코드를 작성합니다. 
     - 제출내용 : 4개의 각각의 코드
