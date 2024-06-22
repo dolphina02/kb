@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Checkout</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Checkout</h1>
+      <div th:if="${products.empty}">
+        <p>No products to checkout</p>
+      </div>
+      <div th:if="${!products.empty}">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Price</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="product : ${products}">
+            <td th:text="${product.name}">Product Name</td>
+            <td th:text="${product.description}">Product Description</td>
+            <td th:text="'$' + ${product.price}">Product Price</td>
+          </tr>
+          </tbody>
+        </table>
+        <a th:href="'/complete?fromCart=' + ${fromCart}" class="btn btn-success">Complete Payment</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
