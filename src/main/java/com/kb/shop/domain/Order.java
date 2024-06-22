@@ -33,7 +33,7 @@ public class Order {
     private double totalAmount;
 
     @Embedded
-    private ShippingInfo shippingAddress;
+    private AddressInfo addressInfo;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Fulfillment> fulfillments;

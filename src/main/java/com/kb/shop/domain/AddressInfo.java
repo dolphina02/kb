@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Embeddable
-public class ShippingInfo {
+public class AddressInfo {
     private String street;
     private String city;
     private String state;
